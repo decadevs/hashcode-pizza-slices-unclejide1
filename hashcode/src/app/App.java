@@ -17,10 +17,12 @@ public class App {
         int maxOrder = 0;
         int typesOfPizza = 0;
         ArrayList<String> slicesInEachPizza = new ArrayList<>(); 
+        ArrayList<Integer> indexOfChosenPizza = new ArrayList<>();
         int sum = 0;
+        int typesOfPizzaOrdered = 0;
         try {
             List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
-            System.out.println(lines);
+            // System.out.println(lines);
         
             System.out.println();
             for (String line : lines) {
@@ -31,17 +33,30 @@ public class App {
                 }else{
                     slicesInEachPizza.addAll(Arrays.asList(newLine));
                 }
-               System.out.println(Arrays.toString(newLine));
-          
             }
+            for(int i = slicesInEachPizza.size() - 1; i >= 0; i--){
+                if(sum + Integer.parseInt(slicesInEachPizza.get(i)) > maxOrder){
+                 continue;
+                }else{
+                    sum += Integer.parseInt(slicesInEachPizza.get(i));
+                    indexOfChosenPizza.add(i);
+                }
+            }
+            typesOfPizzaOrdered =  indexOfChosenPizza.size();
+            String p = "" + typesOfPizzaOrdered;
+            Collections.reverse(indexOfChosenPizza);
+            StringBuilder sResult = new StringBuilder();
+            sResult.append(p);
+            sResult.append("\n");
+            for(int s : indexOfChosenPizza){
+                sResult.append(s);
+                sResult.append("  ");
+            }
+            String fileName1 = "output.txt";
+            Files.writeString(Paths.get(fileName1), sResult, StandardCharsets.ISO_8859_1);
           } catch (IOException e) {
             System.err.println("IOExcetion : " + e.getMessage());
           }
-        System.out.println(maxOrder);
-        System.out.println(typesOfPizza);
-        System.out.println(slicesInEachPizza);
-        
-
     }
     public static void main(String[] args) throws Exception {
        readingAndWritingWithNio();
