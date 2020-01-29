@@ -45,15 +45,15 @@ public class App {
             typesOfPizzaOrdered =  indexOfChosenPizza.size();
             String p = "" + typesOfPizzaOrdered;
             Collections.reverse(indexOfChosenPizza);
-            StringBuilder sResult = new StringBuilder();
-            sResult.append(p);
-            sResult.append("\n");
+            StringBuilder finalResult = new StringBuilder();
+            finalResult.append(p);
+            finalResult.append("\n");
             for(int s : indexOfChosenPizza){
-                sResult.append(s);
-                sResult.append("  ");
+                finalResult.append(s);
+                finalResult.append("  ");
             }
             String fileName1 = "output.txt";
-            Files.writeString(Paths.get(fileName1), sResult, StandardCharsets.ISO_8859_1);
+            Files.writeString(Paths.get(fileName1), finalResult, StandardCharsets.ISO_8859_1);
           } catch (IOException e) {
             System.err.println("IOExcetion : " + e.getMessage());
           }
